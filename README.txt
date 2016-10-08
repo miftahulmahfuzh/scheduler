@@ -1,7 +1,17 @@
-Ruangan
-Nama; Jam Mulai; Jam Selesai; Hari
+HOW TO RUN
+(compile first)
+$ java Main <testcase file> <algorithm index> 
 
-Jadwal
-Nama kegiatan; Ruangan; Jam Mulai; Jam Selesai; Durasi(Jam); Hari
+algorithm index : (1) Hill Climbing, (2) Simulated Annealing, (3) Genetic Algorithm
 
-Hari : Senin (1), Selasa (2), Rabu (3), Kamis (4), Jumat (5)
+example : 
+$ java Main Testcase.txt 1 
+
+TESTCASE FORMAT
+Classroom
+Name; Start Hour; End Hour; Days
+
+Courses
+Name; Classroom; Start Hour; End Hour; Duration; Days
+
+Days : Monday (1), Tuesday (2), Wednesday (3), Thursday (4), Friday (5)
