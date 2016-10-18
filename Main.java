@@ -5,18 +5,10 @@ public class Main
   public static void main(String args[]) {
     InputProcessor parser = new InputProcessor(args[0]);
 
-    Set<String> listNamaRuangan = parser.getListNamaRuangan();
-    HashMap<String, Ruangan> ruangans = new HashMap<String, Ruangan>();
-    for (String namaRuangan : listNamaRuangan) {
-      ruangans.put(namaRuangan, new Ruangan(namaRuangan,
-           parser.getOpenTimeRuangan(namaRuangan), 
-           parser.getCloseTimeRuangan(namaRuangan), 
-           parser.getWorkingDaysRuangan(namaRuangan)));
-    }
-
-    Set<String> listNamaMatkul = parser.getListNamaMatkul();
+    Set<String> listNamaMatkul = parser.getListKeyMatkul();
     Matkul[] matkuls = new Matkul[listNamaMatkul.size()];
     int i = 0;
+
     for (String namaMatkul : listNamaMatkul) {
       matkuls[i] = new Matkul(
           parser.getNamaMatkul(namaMatkul), 
@@ -26,6 +18,17 @@ public class Main
           parser.getDurationMatkul(namaMatkul),
           parser.getDaysMatkul(namaMatkul));
       i++; 
+    }
+
+    Set<String> listKeyRuangan = parser.getListKeyRuangan();
+    HashMap<String, Ruangan> ruangans = new HashMap<String, Ruangan>();
+    for (String keyRuangan : listKeyRuangan) {
+      ruangans.put(keyRuangan, new Ruangan(keyRuangan,
+           parser.getNamaRuangan(keyRuangan),
+           parser.getOpenTimeRuangan(keyRuangan), 
+           parser.getCloseTimeRuangan(keyRuangan), 
+           parser.getWorkingDaysRuangan(keyRuangan),
+           matkuls.length));
     }
 
     int algCode = Integer.parseInt(args[1]);

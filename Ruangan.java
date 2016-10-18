@@ -1,20 +1,23 @@
 public class Ruangan
 {
   private String name;
+  private String key;
   private int openTime;
   private int closeTime;
   private int[] workingDays;
   public boolean[][] activeHours;
 
-  public Ruangan(String _name, int _openTime, int _closeTime, int[] _workingDays)
+  public Ruangan(String _key, String _name, int _openTime, int _closeTime, int[] _workingDays, int totalMatkul)
   {
+    this.key = _key;
     this.name = _name;
     this.openTime = _openTime;
     this.closeTime = _closeTime;
     this.workingDays = _workingDays;
-    this.activeHours = new boolean[6][_closeTime+1];
-    for (int i=0;i<6;i++) {
-      for (int j=0;j<_closeTime+1;j++) {
+    this.activeHours = new boolean[totalMatkul+1][19];
+
+    for (int i=0;i<=totalMatkul;i++) {
+      for (int j=0;j<19;j++) {
         this.activeHours[i][j] = false;
       }
     }
@@ -22,6 +25,7 @@ public class Ruangan
 
   public Ruangan(Ruangan r)
   {
+    this.key = r.key;
     this.name = r.name;
     this.openTime = r.openTime;
     this.closeTime = r.closeTime;
@@ -35,6 +39,11 @@ public class Ruangan
         this.activeHours = r.activeHours;
       }
     }
+  }
+
+  public String getKey()
+  {
+    return this.key;
   }
 
   public String getName()

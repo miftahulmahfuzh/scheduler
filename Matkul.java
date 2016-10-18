@@ -135,6 +135,11 @@ public class Matkul
   }
 
   // GETTER
+  public String getNamaMatkul()
+  {
+    return this.name;
+  }
+
   public static int getTotalMatkul()
   {
     return Matkul.totalMatkul;

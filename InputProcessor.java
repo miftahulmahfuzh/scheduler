@@ -118,19 +118,16 @@ public class InputProcessor
       }
 
       String tmp = attr[0];
+      content[attr.length-1] = tmp;
+      int inc = 0;
 
-      if (!isRuangan) {
-        content[attr.length-1] = attr[0];
-        int inc = 0;
-
-        while (true) {
-          String[] value = hm.get(tmp);
-          if (value == null) {
-            break;
-          }
-
-          tmp = attr[0] + Integer.toString(inc++);
+      while (true) {
+        String[] value = hm.get(tmp);
+        if (value == null) {
+          break;
         }
+
+        tmp = attr[0] + Integer.toString(inc++);
       }
       
       hm.put(tmp, content);
@@ -145,9 +142,20 @@ public class InputProcessor
     return this.rawData;
   }
 
-  public Set<String> getListNamaRuangan()
+  public Set<String> getListKeyRuangan()
   {
     return this.ruangan.keySet(); 
+  }
+
+  public String getNamaRuangan(String ruanganKey)
+  {
+    String[] content = this.ruangan.get(ruanganKey);
+
+    if (content != null) {
+      return content[3];
+    }
+
+    return null;
   }
 
   public int getOpenTimeRuangan(String ruanganName) 
@@ -190,7 +198,7 @@ public class InputProcessor
   {
     int total = 0;
 
-    for (String namaRuangan : this.getListNamaRuangan()) {
+    for (String namaRuangan : this.getListKeyRuangan()) {
       total += this.getWorkingDaysRuangan(namaRuangan).length * 
         (this.getCloseTimeRuangan(namaRuangan) - this.getOpenTimeRuangan(namaRuangan));
     }
@@ -198,7 +206,7 @@ public class InputProcessor
     return total;
   }
 
-  public Set<String> getListNamaMatkul()
+  public Set<String> getListKeyMatkul()
   {
     return this.jadwal.keySet();
   }

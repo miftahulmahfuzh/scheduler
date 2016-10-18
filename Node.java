@@ -44,8 +44,12 @@ public class Node implements Comparable<Node>
   {
     int total = 0;
     for (Matkul m : state) {
-      for (int i=m.getStartHourActive();i<=m.getEndHourActive();i++) {
-        boolean flag = Matkul.ruangans.get(m.getRuanganActive().getName()).activeHours[m.getDayActive()][i]; 
+      for (int i=m.getStartHourActive();i<m.getEndHourActive();i++) {
+        if (i > 18) {
+          break;
+        }
+        
+        boolean flag = Matkul.ruangans.get(m.getRuanganActive().getKey()).activeHours[m.getDayActive()][i]; 
         if (!flag) {
           Matkul.ruangans.get(m.getRuanganActive().getName()).activeHours[m.getDayActive()][i] = true;
           total++;
